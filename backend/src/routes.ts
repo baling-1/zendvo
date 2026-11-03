@@ -75,6 +75,9 @@ import { POST as verifyOtpPost } from "./api/auth/verify-otp/route";
 import { POST as verifyActionOtpPost } from "./api/auth/action-otp/verify/route";
 import { POST as verifyDeletionOtpPost } from "./api/auth/verify-deletion-otp/route";
 
+// Users
+import { GET as resolveRecipientGet } from "./api/users/resolve/route";
+
 // Upload
 import { POST as uploadImagePost } from "./api/upload/image/route";
 
@@ -84,6 +87,9 @@ import { POST as transactionSubmitPost } from "./api/transactions/submit";
 // SEP-24 Webhook
 import { POST as sep24WebhookPost } from "./api/webhooks/sep24/route";
 import { GET as savingsDashboardGet } from "./api/savings/dashboard/route";
+import { POST as savingsTrustlinePost } from "./api/savings/trustline/route";
+import { GET as dashboardStatsGet } from "./api/dashboard/stats/route";
+import { GET as dashboardGiftsGet } from "./api/dashboard/gifts/route";
 
 export const apiRouter = Router();
 
@@ -93,7 +99,9 @@ apiRouter.post("/api/transactions/submit", makeExpressHandler(transactionSubmitP
 // 7. SEP-24 Anchor webhook listener
 apiRouter.post("/api/webhooks/sep24", makeExpressHandler(sep24WebhookPost));
 apiRouter.get("/api/savings/dashboard", makeExpressHandler(savingsDashboardGet));
-
+apiRouter.post("/api/savings/trustline", makeExpressHandler(savingsTrustlinePost));
+apiRouter.get("/api/dashboard/stats", makeExpressHandler(dashboardStatsGet));
+apiRouter.get("/api/dashboard/gifts", makeExpressHandler(dashboardGiftsGet));
 
 // 1. Authentication routes
 apiRouter.post("/api/auth", makeExpressHandler(authPost));
@@ -137,6 +145,9 @@ apiRouter.post(
   "/api/auth/verify-deletion-otp",
   makeExpressHandler(verifyDeletionOtpPost),
 );
+
+// 2. Users routes
+apiRouter.get("/api/users/resolve", makeExpressHandler(resolveRecipientGet));
 
 
 
